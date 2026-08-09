@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 # plazirsoon entrypoint — your stack
 set -euo pipefail
-CMD="${1:-status}"
+
+CMD="${1:-}"
+
 case "$CMD" in
   install|status|swarm|judge|config)
-    echo "plazirsoon $CMD"
+    printf 'plazirsoon: %s is not implemented\n' "$CMD" >&2
+    exit 69
+    ;;
+  help|-h|--help)
+    printf 'usage: plazirsoon [install|status|swarm|judge|config]\n'
+    exit 0
     ;;
   *)
-    echo "usage: plazirsoon [install|status|swarm|judge|config]"
+    printf 'usage: plazirsoon [install|status|swarm|judge|config]\n' >&2
+    exit 64
     ;;
 esac
